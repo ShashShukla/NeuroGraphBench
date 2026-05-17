@@ -1,0 +1,53 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "neurographbench"
+version = "0.1.0.dev0"
+description = "Open-source toolset for segment-level connectomic analysis of fly brain datasets"
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [
+    { name = "Aurel A. Lazar" },
+    { name = "Shashwat Shukla" },
+    { name = "Yiyin Zhou" },
+]
+license = { text = "MIT" }
+dependencies = [
+    # fba.server
+    "fastapi>=0.110",
+    "uvicorn[standard]>=0.27",
+    "pydantic>=2.0",
+    "neo4j>=5.0",
+    # fba.client + ngb
+    "requests>=2.31",
+    "numpy>=1.24",
+    "pandas>=2.0",
+    "navis>=1.5",
+    "networkx>=3.0",
+    "plotly>=5.18",
+    "dash>=2.14",
+    "alphashape>=1.3",
+    "seaborn>=0.13",
+    "scipy>=1.11",
+    "itables>=1.6",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "pytest-asyncio>=0.23",
+    "httpx>=0.27",
+    "ruff>=0.4",
+]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["fba*", "ngb*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_functions = ["test*"]
+addopts = "-ra"
